@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KnowledgeNest</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .main-content h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+
+    .main-content p {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-bottom: 30px;
+    }
+
+    .search-bar {
+      margin-bottom: 40px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      max-width: 500px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      background-color: #1a1a1a;
+      color: white;
+      text-align: center;
+    }
+
+    .search-bar input::placeholder {
+      color: #aaa;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background-color: #1a1a1a;
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: left;
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 16px;
+    }
+
+    .card-content h3 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .card-content p {
+      font-size: 0.95rem;
+      color: #bbb;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <i class="fa-solid fa-asterisk"></i>
+      <span><b>knowledge</b>Nest</span>
+    </div>
+
+    <nav class="nav-links">
+      <a href="home.html" class="active">Home</a>
+      <a href="topics.html">Topics</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="right-section">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <i class="fa-regular fa-user"></i>
+      <img src="profile1.png" alt="Profile" class="profile-pic">
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <h1>Explore a Universe of Knowledge</h1>
+    <p>Dive into diverse subjects and discover fascinating facts across various educational categories.</p>
+
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search topics...">
+    </div>
+
+    <div class="grid" id="topicsContainer"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-left">
+      <a href="#">Quick Links</a>
+      <a href="#">Learn More</a>
+      <a href="#">Support</a>
+    </div>
+
+    <div class="footer-right">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+  </footer>
+
+  <!-- JavaScript (OOP + Search + Navigation Link) -->
+  <script>
+    class Topic {
+      constructor(title, description, image, link) {
+        this.title = title;
+        this.description = description;
+        this.image = image;
+        this.link = link;
+      }
+
+      createCard() {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.innerHTML = `
+          <a href="${this.link}">
+            <img src="${this.image}" alt="${this.title}">
+            <div class="card-content">
+              <h3>${this.title}</h3>
+              <p>${this.description}</p>
+            </div>
+          </a>
+        `;
+        return card;
+      }
+    }
+
+    class TopicManager {
+      constructor(containerId, searchInputId) {
+        this.container = document.getElementById(containerId);
+        this.searchInput = document.getElementById(searchInputId);
+        this.topics = [];
+      }
+
+      addTopic(topic) {
+        this.topics.push(topic);
+      }
+
+      displayTopics(filteredTopics = this.topics) {
+        this.container.innerHTML = "";
+        filteredTopics.forEach(topic => {
+          this.container.appendChild(topic.createCard());
+        });
+      }
+
+      enableSearch() {
+        this.searchInput.addEventListener("input", () => {
+          const keyword = this.searchInput.value.toLowerCase();
+          const filtered = this.topics.filter(topic =>
+            topic.title.toLowerCase().includes(keyword)
+          );
+          this.displayTopics(filtered);
+        });
+      }
+    }
+
+    // Initialize Topics
+    const manager = new TopicManager("topicsContainer", "searchInput");
+
+    const topicsList = [
+      new Topic("Technology", "Explore the latest advancements shaping our future.", "technology1.png", "explore.html"), // 🔗 Linked to explore.html
+      new Topic("Animals", "Discover species, habitats, and fascinating animal behavior.", "animal1.png", "animala.html"),
+      new Topic("Space", "Journey through galaxies and unravel cosmic mysteries.", "space1.png", "space.html"),
+      new Topic("History", "Uncover civilizations and events that shaped humanity.", "history.png", "history.html"),
+      new Topic("Art & Culture", "Explore creativity and expression across the world.", "art and culture.png", "arts.html"),
+      new Topic("Science", "Understand biology, physics, and chemistry in our world.", "science.png", "science.html"),
+      new Topic("Health & Wellness", "Learn about fitness, nutrition, and mental health.", "health.png", "health.html"),
+      new Topic("Finance", "Grasp the basics of money management and investments.", "finance.png", "finance.html"),
+      new Topic("Philosophy", "Think deeply about life, ethics, and human purpose.", "philosphy.png", "philosophy.html")
+    ];
+
+    topicsList.forEach(topic => manager.addTopic(topic));
+    manager.displayTopics();
+    manager.enableSearch();
+  </script>
+</body>
+</html>

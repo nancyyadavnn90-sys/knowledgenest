@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: #1F1F23;
+      width: 320px;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .login-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .login-container h1 {
+      color: #fff;
+      font-size: 24px;
+      margin: 16px 0 8px;
+    }
+
+    .login-container p {
+      color: #ccc;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .login-container label {
+      display: block;
+      color: #ccc;
+      text-align: left;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      border: none;
+      border-radius: 6px;
+      background-color: #2A2A2E;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .login-container input::placeholder {
+      color: #888;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .login-btn {
+      background-color: #4CAF50;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .signup-btn {
+      background-color: #000;
+      color: white;
+      border: 1px solid #333;
+    }
+
+    .forgot-password {
+      display: block;
+      margin-top: 12px;
+      font-size: 13px;
+      color: #888;
+      text-decoration: none;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: 700;
+      color:#4CAF50;
+      margin-top: 12px;
+    }
+
+    .brand span {
+      color: #4CAF50;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <img src="login brain.png" alt="Brain">
+    
+    <div class="brand">✴ <span>knowledge</span>Nest</div>
+    
+    <h1>Welcome Back!</h1>
+    <p>Sign in to access your learning journey.</p>
+    
+     <form action="home.html" method="get"></form>
+      <label for="email">Email or Username</label>
+      <input type="text" id="email" name="email" placeholder="Enter your email or username">
+      
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="********">
+      
+      <button type="submit" onclick="window.location.href='home.html'"class="login-btn">Login</button>
+            <button type="button" class="signup-btn">Sign Up</button>
+      
+      <a href="#" class="forgot-password">Forgot Password?</a>
+    </form>
+  </div>
+  
+</body>
+</html>
